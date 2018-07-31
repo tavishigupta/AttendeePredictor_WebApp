@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Event Attendee Predictor</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Event Attendee Predictor</h1>
+        </div>
+
+        <div class="attributes">
+            <h4>Event Date</h4>
+            <input type="date" id="eventdate" name="date"/>
+
+            <h4>Event Agenda</h4>
+            <textarea rows="4" cols="50"></textarea>
+
+            <h4>Event Length (in hours)</h4>
+            <input type="number" id="eventlength" name="length" min=
+            0.5" max="1000"/>
+
+            <h4>Event Venue</h4>
+            <input type="checkbox" onClick="selectAll(this, 'venue')" /> Select All
+            <br/>
+            <input type="checkbox" name="venue" value="offices"> Microsoft Office(s)
+            <br/>
+            <input type="checkbox" name="venue" value="stores"> Microsoft Store(s)
+            <br/>
+            <input type="checkbox" name="venue" value="schools"> School(s)
+            <br/>
+            <input type="checkbox" name="venue" value="premises"> Partner Premises
+            <br/>
+            <input type="checkbox" name="venue" value="other"> Other
+            <br/>
+
+            <h4>Audience (Age)</h4>
+            <input type="checkbox" onClick="selectAll(this, 'audience')" /> Select All
+            <br/>
+            <input type="checkbox" name="audience" value="under5"> Under 5
+            <br/>
+            <input type="checkbox" name="audience" value="6to11"> 6 - 11
+            <br/>
+            <input type="checkbox" name="audience" value="12to17"> 12 - 17
+            <br/>
+            <input type="checkbox" name="audience" value="18to22"> 18 - 22
+            <br/>
+            <input type="checkbox" name="audience" value="23Over"> 23+
+            <br/>
+            <input type="checkbox" name="audience" value="industry"> Industry Respresentatives
+            <br/>
+            <input type="checkbox" name="audience" value="educators"> Educators
+            <br/>
+            <input type="checkbox" name="audience" value="government"> Government Respresentatives
+            <br/>
+            <input type="checkbox" name="audience" value="other"> Other
+            <br/>
+
+            <h4> <input type="submit" value="Calculate Attendees"/> </h4>
+
+        </div>
+
+        <footer class="footer">
+            <p>&copy; Microsoft Corporation</p>
+        </footer>
+    </div>
+</body>
+
+<script>
+    function selectAll(source, name) {
+        checkboxes = document.getElementsByName(name);
+        for (var i = 0, n = checkboxes.length; i < n; i++) {
+            checkboxes[i].checked = source.checked;
+        }
+    }
+</script>
+
+</html>
