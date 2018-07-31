@@ -1,1 +1,1 @@
-# Web-App-Attendee-Predictor
+# Event Attendee Predictor
