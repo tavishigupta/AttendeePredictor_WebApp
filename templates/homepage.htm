@@ -56,10 +56,10 @@
             <br/>
             <input type="checkbox" name="audience" value="other"> Other
             <br/>
-        </form>
-
-            <h4> <input type="submit" value="Calculate Attendees" onClick="checkValExists(this)"/> </h4>
         
+
+            <h4> <input type="submit" value="Calculate Attendees" onClick="checkValExists()"/> </h4>
+        </form>
         <footer class="footer">
             <p>&copy; Microsoft Corporation</p>
         </footer>
@@ -75,8 +75,8 @@
     }
 
     // checks for invalid values
-    function checkValExists(source) {
-        var noVal = 0;
+    function checkValExists() {
+        var noVal = 0; // flag to check if any of the values are empty
 
         if(document.getElementsByName("date").values == null)
             noVal = 1;
@@ -105,8 +105,10 @@
             }
         }
 
-        if(noVal == 1) 
-            alert("Please fill in all the values of the form.");
+        if(noVal == 1) {
+            alert("Oops! Looks like you haven't filled out all the values in the form.");
+            location.reload();
+        }
         else
             window.location = "/getprediction"
     }
