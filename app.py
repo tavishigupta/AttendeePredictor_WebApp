@@ -1,7 +1,7 @@
 from flask import Flask, request, render_template
+from decimal import Decimal
 import urllib
 import json
-from decimal import Decimal
 
 # create flask app
 app = Flask(__name__)
@@ -130,7 +130,9 @@ def get_prediction():
 
             # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
             print(error.info())
-            print(json.loads(error.read()))                 
+            print(json.loads(error.read()))
+
+            return render_template('result.htm', prediction = 'error loading prediction')              
 
 # check if the executed file is the main program and run the app
 if __name__ == "__main__":

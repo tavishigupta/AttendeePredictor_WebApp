@@ -57,7 +57,7 @@
             <input type="checkbox" name="audience" value="other"> Other
             <br/>
 
-            <h4> <input type="submit" value="Calculate Attendees"/> </h4>
+            <h4> <input type="submit" value="Calculate Attendees" onClick="checkValExists(this)"/> </h4>
         </form>
 
         <footer class="footer">
@@ -67,11 +67,46 @@
 </body>
 
 <script>
+    // selects all checkboxes
     function selectAll(source, name) {
         checkboxes = document.getElementsByName(name);
-        for (var i = 0, n = checkboxes.length; i < n; i++) {
+        for (var i = 0; i < checkboxes.length; i++)
             checkboxes[i].checked = source.checked;
+    }
+
+    // checks for invalid values
+    function checkValExists(source){
+        var noVal = 0;
+
+        if(document.getElementsByName("date").values == "mm/dd/yyyy")
+            noVal = 1;
+
+        if(noVal == 0 && document.getElementsByName("agenda").length == 0)
+            noVal = 1;
+        
+        if(noVal == 0 && document.getElementsByName("length").length == 0)
+            noVal = 1;
+
+        if(noVal == 0) {
+            noVal = 1;
+            checkboxes = document.getElementsByName("venue");
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked)
+                    noVal = 0;
+            }
         }
+
+        if(noVal == 0) {
+            noVal = 1;
+            checkboxes = document.getElementsByName("audience");
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked)
+                    noVal = 0;
+            }
+        }
+
+        if(noVal == 1)
+            alert("Please fill in all the values of the form.");
     }
 </script>
 
