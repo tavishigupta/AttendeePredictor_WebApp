@@ -1,4 +1,7 @@
 from flask import Flask, request, render_template
+import urllib
+import json
+from decimal import Decimal
 
 # create flask app
 app = Flask(__name__)
@@ -86,15 +89,40 @@ def get_prediction():
         print(government)
         print(othera)
 
-        # pkl_file = open('cat', 'rb')
-        # index_dict = pickle.load(pkl_file)
-        # cat_vector = np.zeros(len(index_dict))
-        
-        # pkl_file = open('logmodel.pkl', 'rb')
-        # logmodel = pickle.load(pkl_file)
-        # prediction = logmodel.predict(cat_vector)
-        
-        return render_template('result.htm', prediction = 5)
+        data = {
+            "Inputs": {
+                "Input": {
+                    "ColumnNames": ["Event Date", "Event Agenda", "Event Venue: Microsoft Office(s)", 
+                                    "Event Venue: Microsoft Store(s)", "Event Venue: Partner Premises", 
+                                    "Event Venue: School(s)", "Event Venue: Other", "Audience (Age): Under 5", 
+                                    "Audience (Age): 6-11", "Audience (Age): 12-17", "Audience (Age): 18-22", 
+                                    "Audience (Age): 23+", "Audience: Industry Representatives", "Audience: Educators", 
+                                    "Audience: Government Representatives", "Audience: Other", "Event Length"],
+                    "Values": [ [date, agenda, offices, stores, premises, schools, otherv, under5, six, twelve, 
+                                eighteen, over23, industry, educators, government, othera, length ], ]
+                },        
+            }
+        }
+
+        body = str.encode(json.dumps(data))
+        url = 'https://ussouthcentral.services.azureml.net/workspaces/9b6da4f58f7440efb562c248970511c5/services/e1218058ea3749b49a8513d858a06e69/execute?api-version=2.0&details=true'
+        api_key = ''
+        headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
+
+        try:
+            req = urllib.request.Request(url, body, headers) 
+            response = urllib.request.urlopen(req)
+            JSONprediction = json.loads(response.read())
+            prediction = Decimal(JSONprediction['Results']['output']['value']['Values'][0][0])
+            prediction = "{0:.2f}".format(prediction)
+   
+            return render_template('result.htm', prediction = prediction)
+        except urllib.request.HTTPError as error:
+            print("The request failed with status code: " + str(error.code))
+
+            # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
+            print(error.info())
+            print(json.loads(error.read()))                 
 
 # check if the executed file is the main program and run the app
 if __name__ == "__main__":
