@@ -11,16 +11,16 @@
             <h1>Event Attendee Predictor</h1>
         </div>
 
-        <div class="attributes">
+        <form action="/getprediction" method="POST">
             <h4>Event Date</h4>
             <input type="date" id="eventdate" name="date"/>
 
             <h4>Event Agenda</h4>
-            <textarea rows="4" cols="50"></textarea>
+            <textarea rows="4" cols="50" name="agenda"></textarea>
 
             <h4>Event Length (in hours)</h4>
             <input type="number" id="eventlength" name="length" min=
-            0.5" max="1000"/>
+            0.5" max="500"/>
 
             <h4>Event Venue</h4>
             <input type="checkbox" onClick="selectAll(this, 'venue')" /> Select All
@@ -59,8 +59,7 @@
             <br/>
 
             <h4> <input type="submit" value="Calculate Attendees"/> </h4>
-
-        </div>
+        </form>
 
         <footer class="footer">
             <p>&copy; Microsoft Corporation</p>
