@@ -38,7 +38,7 @@ def get_prediction():
         print(venue)
         print(audience)
 
-        # 
+        # true value for selcted venue on homepage
         if 'offices' in venue:
             offices = 1
         if 'stores' in venue:
@@ -50,6 +50,7 @@ def get_prediction():
         if 'other' in venue:
             otherv = 1
 
+        # true value for selcted audience on homepage
         if 'under5' in audience:
             under5 = 1
         if '6to11' in audience:
