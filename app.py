@@ -89,6 +89,7 @@ def get_prediction():
         print(government)
         print(othera)
 
+        # input data in the correct JSON format
         data = {
             "Inputs": {
                 "Input": {
@@ -104,17 +105,24 @@ def get_prediction():
             }
         }
 
-        body = str.encode(json.dumps(data))
+
+        # prepare values for request
+        body = str.encode(json.dumps(data)) # JSON encoded string
         url = 'https://ussouthcentral.services.azureml.net/workspaces/9b6da4f58f7440efb562c248970511c5/services/e1218058ea3749b49a8513d858a06e69/execute?api-version=2.0&details=true'
-        api_key = ''
+        api_key = '8fLSTsfwLcV38xMsOtUYAxkW/CkPNGzIGRj7qFR8hyajLkvPiCjSA5KxuWr4oaOUFdazpwrw/2Ywvhom0mzb6w=='
         headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
         try:
+            # get a response from request URL
             req = urllib.request.Request(url, body, headers) 
             response = urllib.request.urlopen(req)
+
+            # convert the response to string format
             JSONprediction = json.loads(response.read())
+
+            # extract the prediction value
             prediction = Decimal(JSONprediction['Results']['output']['value']['Values'][0][0])
-            prediction = "{0:.2f}".format(prediction)
+            prediction = "{0:.0f}".format(prediction)
    
             return render_template('result.htm', prediction = prediction)
         except urllib.request.HTTPError as error:
