@@ -56,10 +56,10 @@
             <br/>
             <input type="checkbox" name="audience" value="other"> Other
             <br/>
-
-            <h4> <input type="submit" value="Calculate Attendees" onClick="checkValExists(this)"/> </h4>
         </form>
 
+            <h4> <input type="submit" value="Calculate Attendees" onClick="checkValExists(this)"/> </h4>
+        
         <footer class="footer">
             <p>&copy; Microsoft Corporation</p>
         </footer>
@@ -75,16 +75,16 @@
     }
 
     // checks for invalid values
-    function checkValExists(source){
+    function checkValExists(source) {
         var noVal = 0;
 
-        if(document.getElementsByName("date").values == "mm/dd/yyyy")
+        if(document.getElementsByName("date").values == null)
             noVal = 1;
 
-        if(noVal == 0 && document.getElementsByName("agenda").length == 0)
+        if(noVal == 0 && document.getElementsByName("agenda").values == null)
             noVal = 1;
         
-        if(noVal == 0 && document.getElementsByName("length").length == 0)
+        if(noVal == 0 && document.getElementsByName("length").values == null)
             noVal = 1;
 
         if(noVal == 0) {
@@ -105,8 +105,10 @@
             }
         }
 
-        if(noVal == 1)
+        if(noVal == 1) 
             alert("Please fill in all the values of the form.");
+        else
+            window.location = "/getprediction"
     }
 </script>
 
