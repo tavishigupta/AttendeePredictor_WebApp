@@ -105,7 +105,6 @@ def get_prediction():
             }
         }
 
-
         # prepare values for request
         body = str.encode(json.dumps(data)) # JSON encoded string
         url = 'https://ussouthcentral.services.azureml.net/workspaces/9b6da4f58f7440efb562c248970511c5/services/e1218058ea3749b49a8513d858a06e69/execute?api-version=2.0&details=true'

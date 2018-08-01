@@ -57,9 +57,9 @@
             <input type="checkbox" name="audience" value="other"> Other
             <br/>
         
-
             <h4> <input type="submit" value="Calculate Attendees" onClick="checkValExists()"/> </h4>
         </form>
+
         <footer class="footer">
             <p>&copy; Microsoft Corporation</p>
         </footer>
@@ -107,7 +107,7 @@
 
         if(noVal == 1) {
             alert("Oops! Looks like you haven't filled out all the values in the form.");
-            location.reload();
+            location.reload(forceGet); // reloads page from server
         }
         else
             window.location = "/getprediction"
