@@ -132,5 +132,4 @@ def get_prediction():
             print(error.info())
             print(json.loads(error.read()))
 
-            return render_template('result.html', prediction = 'error loading prediction')              
-
+            return render_template('result.html', prediction = 'error loading prediction')

@@ -1,8 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Event Attendee Predictor</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -13,13 +18,13 @@
 
         <form action="/prediction" method="POST">
             <h4>Event Date</h4>
-            <input type="date" id="eventdate" name="date" required/>
+            <input type="date" class="form-control" id="eventdate" name="date" required/>
 
             <h4>Event Agenda</h4>
-            <textarea rows="4" cols="50" name="agenda" required></textarea>
+            <textarea rows="4" class="form-control" cols="50" name="agenda" required></textarea>
 
             <h4>Event Length (in hours)</h4>
-            <input type="number" id="eventlength" name="length" step="0.1" min="0.5" max="500" required/>
+            <input type="number" class="form-control" id="eventlength" name="length" step="0.1" min="0.5" max="500" required/>
 
             <h4>Event Venue </h4>
             <input type="checkbox" onClick="selectAll(this, 'venue')" /> Select All
@@ -57,7 +62,7 @@
             <input type="checkbox" name="audience" value="other"> Other
             <br/>
             
-            <h4> <input type="submit" value="Calculate Attendees" onClick="checkValExists()"/> </h4>
+            <h4> <input type="submit" class="form-control" value="Calculate Attendees" onClick="checkValExists()"/> </h4>
         </form>
 
         <footer class="footer">
