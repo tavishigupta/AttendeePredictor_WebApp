@@ -1,2 +1,12 @@
 # ignore API key file
 api.key
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Auto-generated virtual environment
+/env/
+
+# Auto-generated web.config
+/web.config
