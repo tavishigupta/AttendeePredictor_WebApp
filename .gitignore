@@ -5,6 +5,10 @@ api.key
 __pycache__/
 *.pyc
 
+# VS Code settings
+.vscode/
+*.json
+
 # Auto-generated virtual environment
 /env/
 
