@@ -1,6 +1,9 @@
 # ignore API key file
 api.key
 
+# PTVS analysis
+.ptvs/
+
 # Python cache
 __pycache__/
 *.pyc
