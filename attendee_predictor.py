@@ -134,7 +134,3 @@ def get_prediction():
 
             return render_template('result.html', prediction = 'error loading prediction')              
 
-# check if the executed file is the main program and run the app
-if __name__ == "__main__":
-    app.debug = True # print traceback to console
-    app.run()
