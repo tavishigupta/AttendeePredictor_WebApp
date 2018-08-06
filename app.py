@@ -13,10 +13,10 @@ def cleanAgenda(agenda):
 # return homepage for user input
 @app.route("/")
 def main():
-    return render_template('homepage.htm')
+    return render_template('homepage.html')
 
 # return result page with prediction
-@app.route('/getprediction', methods=['POST','GET'])
+@app.route('/prediction', methods=['POST','GET'])
 def get_prediction():
     if request.method == 'POST':
         # instantiate all venue and audience inputs
@@ -106,9 +106,10 @@ def get_prediction():
         }
 
         # prepare values for request
+        with open('api.key', 'r') as apikey:
+            api_key = apikey.read().replace('\n', '') # API key in another file for security purposes
         body = str.encode(json.dumps(data)) # JSON encoded string
         url = 'https://ussouthcentral.services.azureml.net/workspaces/9b6da4f58f7440efb562c248970511c5/services/e1218058ea3749b49a8513d858a06e69/execute?api-version=2.0&details=true'
-        api_key = ''
         headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
 
         try:
@@ -123,7 +124,7 @@ def get_prediction():
             prediction = Decimal(JSONprediction['Results']['output']['value']['Values'][0][0])
             prediction = "{0:.0f}".format(prediction)
    
-            return render_template('result.htm', prediction = prediction)
+            return render_template('result.html', prediction = prediction)
         except urllib.request.HTTPError as error:
             print("The request failed with status code: " + str(error.code))
 
@@ -131,7 +132,7 @@ def get_prediction():
             print(error.info())
             print(json.loads(error.read()))
 
-            return render_template('result.htm', prediction = 'error loading prediction')              
+            return render_template('result.html', prediction = 'error loading prediction')              
 
 # check if the executed file is the main program and run the app
 if __name__ == "__main__":

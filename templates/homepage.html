@@ -11,17 +11,17 @@
             <h1>Event Attendee Predictor</h1>
         </div>
 
-        <form action="/getprediction" method="POST">
+        <form action="/prediction" method="POST">
             <h4>Event Date</h4>
-            <input type="date" id="eventdate" name="date"/>
+            <input type="date" id="eventdate" name="date" required/>
 
             <h4>Event Agenda</h4>
-            <textarea rows="4" cols="50" name="agenda"></textarea>
+            <textarea rows="4" cols="50" name="agenda" required></textarea>
 
             <h4>Event Length (in hours)</h4>
-            <input type="number" id="eventlength" name="length" step="0.1" min="0.5" max="500"/>
+            <input type="number" id="eventlength" name="length" step="0.1" min="0.5" max="500" required/>
 
-            <h4>Event Venue</h4>
+            <h4>Event Venue </h4>
             <input type="checkbox" onClick="selectAll(this, 'venue')" /> Select All
             <br/>
             <input type="checkbox" name="venue" value="offices"> Microsoft Office(s)
@@ -56,7 +56,7 @@
             <br/>
             <input type="checkbox" name="audience" value="other"> Other
             <br/>
-        
+            
             <h4> <input type="submit" value="Calculate Attendees" onClick="checkValExists()"/> </h4>
         </form>
 
@@ -75,7 +75,7 @@
     }
 
     // checks for invalid values
-    function checkValExists() {
+   /* function checkValExists() {
         var noVal = 0; // flag to check if any of the values are empty
 
         if(document.getElementsByName("date").values == null)
@@ -111,7 +111,7 @@
         }
         else
             window.location = "/getprediction"
-    }
+    } */
 </script>
 
 </html>
