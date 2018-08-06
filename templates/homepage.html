@@ -5,69 +5,91 @@
     <title>Event Attendee Predictor</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="css/makepretty.css" rel="stylesheet" type="text/css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Event Attendee Predictor</h1>
+        <div class="row">
+            <div class="col-xs-8 col-xs-3"></div>
+            <div class="col-xs-8 col-sm-6">
+            <div class="header">
+                <h1>Event Attendee Predictor</h1>
+            </div>
+
+            <form action="/prediction" method="POST">
+                <div class="form-group">
+                    <h4>Event Date</h4>
+                    <input type="date" class="form-control" id="eventdate" name="date" placeholder="mm/dd/yyyy" required/>
+                </div>
+                
+                <div class="form-group">
+                    <h4>Event Agenda</h4>
+                    <textarea rows="4" class="form-control" cols="50" name="agenda" placeholder="Enter a description of the event"required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <h4>Event Length</h4>
+                    <input type="number" class="form-control" id="eventlength" name="length" step="0.1" min="0.5" max="500"
+                        placeholder="Enter the duration of the event in hours" required/>
+                </div>
+
+                <div class="checkbox">
+                    <h4>Event Venue </h4>
+                    <label>
+                        <input type="checkbox" onClick="selectAll(this, 'venue')" /> Select All
+                        <br/>
+                        <input type="checkbox" name="venue" value="offices"> Microsoft Office(s)
+                        <br/>
+                        <input type="checkbox" name="venue" value="stores"> Microsoft Store(s)
+                        <br/>
+                        <input type="checkbox" name="venue" value="schools"> School(s)
+                        <br/>
+                        <input type="checkbox" name="venue" value="premises"> Partner Premises
+                        <br/>
+                        <input type="checkbox" name="venue" value="other"> Other
+                        <br/>
+                    </label>
+                </div>
+                    
+                <div class="checkbox">
+                    <h4>Audience (Age)</h4>
+                    <label>
+                        <input type="checkbox" onClick="selectAll(this, 'audience')" /> Select All
+                        <br/>
+                        <input type="checkbox" name="audience" value="under5"> Under 5
+                        <br/>
+                        <input type="checkbox" name="audience" value="6to11"> 6 - 11
+                        <br/>
+                        <input type="checkbox" name="audience" value="12to17"> 12 - 17
+                        <br/>
+                        <input type="checkbox" name="audience" value="18to22"> 18 - 22
+                        <br/>
+                        <input type="checkbox" name="audience" value="23Over"> 23+
+                        <br/>
+                        <input type="checkbox" name="audience" value="industry"> Industry Respresentatives
+                        <br/>
+                        <input type="checkbox" name="audience" value="educators"> Educators
+                        <br/>
+                        <input type="checkbox" name="audience" value="government"> Government Respresentatives
+                        <br/>
+                        <input type="checkbox" name="audience" value="other"> Other
+                        <br/>
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn btn-default" onClick="checkValExists()"/> Calculate Attendees </button>
+            </form>
+
+            <footer class="footer">
+                <p>&copy; Microsoft Corporation</p>
+            </footer>
+            </div>
+            <div class="col-xs-8 col-xs-6"></div>
         </div>
-
-        <form action="/prediction" method="POST">
-            <h4>Event Date</h4>
-            <input type="date" class="form-control" id="eventdate" name="date" required/>
-
-            <h4>Event Agenda</h4>
-            <textarea rows="4" class="form-control" cols="50" name="agenda" required></textarea>
-
-            <h4>Event Length (in hours)</h4>
-            <input type="number" class="form-control" id="eventlength" name="length" step="0.1" min="0.5" max="500" required/>
-
-            <h4>Event Venue </h4>
-            <input type="checkbox" onClick="selectAll(this, 'venue')" /> Select All
-            <br/>
-            <input type="checkbox" name="venue" value="offices"> Microsoft Office(s)
-            <br/>
-            <input type="checkbox" name="venue" value="stores"> Microsoft Store(s)
-            <br/>
-            <input type="checkbox" name="venue" value="schools"> School(s)
-            <br/>
-            <input type="checkbox" name="venue" value="premises"> Partner Premises
-            <br/>
-            <input type="checkbox" name="venue" value="other"> Other
-            <br/>
-
-            <h4>Audience (Age)</h4>
-            <input type="checkbox" onClick="selectAll(this, 'audience')" /> Select All
-            <br/>
-            <input type="checkbox" name="audience" value="under5"> Under 5
-            <br/>
-            <input type="checkbox" name="audience" value="6to11"> 6 - 11
-            <br/>
-            <input type="checkbox" name="audience" value="12to17"> 12 - 17
-            <br/>
-            <input type="checkbox" name="audience" value="18to22"> 18 - 22
-            <br/>
-            <input type="checkbox" name="audience" value="23Over"> 23+
-            <br/>
-            <input type="checkbox" name="audience" value="industry"> Industry Respresentatives
-            <br/>
-            <input type="checkbox" name="audience" value="educators"> Educators
-            <br/>
-            <input type="checkbox" name="audience" value="government"> Government Respresentatives
-            <br/>
-            <input type="checkbox" name="audience" value="other"> Other
-            <br/>
-            
-            <h4> <input type="submit" class="form-control" value="Calculate Attendees" onClick="checkValExists()"/> </h4>
-        </form>
-
-        <footer class="footer">
-            <p>&copy; Microsoft Corporation</p>
-        </footer>
     </div>
 </body>
 
