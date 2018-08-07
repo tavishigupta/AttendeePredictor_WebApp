@@ -3,7 +3,7 @@ This script runs the Attendee Predictor application using a development server.
 """
 
 from os import environ
-from Attendee_Predictor import app
+from Attendee_Predictor import app # imports the code from Attendee_Predictor/__init__.py
 
 # WSGI interface available at the top level for wfastcgi to access it
 wsgi_app = app.wsgi_app
