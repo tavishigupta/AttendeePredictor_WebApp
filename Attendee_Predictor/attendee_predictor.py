@@ -1,10 +1,12 @@
-from flask import Flask, request, render_template
+"""
+Routes and views for the flask application.
+"""
+
+from Attendee_Predictor import app
+from flask import request, render_template
 from decimal import Decimal
 import urllib
 import json
-
-# create flask app
-app = Flask(__name__)
 
 # removes all new lines for correct input to trained model
 def cleanAgenda(agenda):
@@ -106,7 +108,7 @@ def get_prediction():
         }
 
         # prepare values for request
-        with open('api.key', 'r') as apikey:
+        with open('Attendee_Predictor/api.key', 'r') as apikey:
             api_key = apikey.read().replace('\n', '') # API key in another file for security purposes
         body = str.encode(json.dumps(data)) # JSON encoded string
         url = 'https://ussouthcentral.services.azureml.net/workspaces/9b6da4f58f7440efb562c248970511c5/services/e1218058ea3749b49a8513d858a06e69/execute?api-version=2.0&details=true'

@@ -3,7 +3,10 @@ This script runs the Attendee Predictor application using a development server.
 """
 
 from os import environ
-from attendee_predictor import app
+from Attendee_Predictor import app
+
+# WSGI interface available at the top level for wfastcgi to access it
+wsgi_app = app.wsgi_app
 
 # check if the executed file is the main program and run the app
 if __name__ == '__main__':
