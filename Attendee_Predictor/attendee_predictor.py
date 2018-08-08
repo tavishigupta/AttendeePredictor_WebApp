@@ -5,8 +5,9 @@ Routes and views for the flask application.
 from Attendee_Predictor import app
 from flask import request, render_template
 from decimal import Decimal
-import urllib
+import urllib2
 import json
+import os
 
 # removes all new lines for correct input to trained model
 def cleanAgenda(agenda):
@@ -108,16 +109,14 @@ def get_prediction():
         }
 
         # prepare values for request
-        with open('Attendee_Predictor/api.key', 'r') as apikey:
-            api_key = apikey.read().replace('\n', '') # API key in another file for security purposes
         body = str.encode(json.dumps(data)) # JSON encoded string
         url = 'https://ussouthcentral.services.azureml.net/workspaces/9b6da4f58f7440efb562c248970511c5/services/e1218058ea3749b49a8513d858a06e69/execute?api-version=2.0&details=true'
-        headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ api_key)}
+        headers = {'Content-Type':'application/json', 'Authorization':('Bearer '+ os.environ['api_key'])}
 
         try:
             # get a response from request URL
-            req = urllib.request.Request(url, body, headers) 
-            response = urllib.request.urlopen(req)
+            req = urllib2.Request(url, body, headers) 
+            response = urllib2.urlopen(req)
 
             # convert the response to string format
             JSONprediction = json.loads(response.read())
@@ -127,7 +126,7 @@ def get_prediction():
             prediction = "{0:.0f}".format(prediction)
    
             return render_template('result.html', prediction = prediction)
-        except urllib.request.HTTPError as error:
+        except urllib2.HTTPError as error:
             print("The request failed with status code: " + str(error.code))
 
             # Print the headers - they include the requert ID and the timestamp, which are useful for debugging the failure
