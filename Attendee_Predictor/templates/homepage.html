@@ -40,7 +40,7 @@
                 <div class="checkbox">
                     <h4>Event Venue </h4>
                     <label>
-                        <input type="checkbox" onClick="selectAll(this, 'venue')" /> Select All
+                        <input type="checkbox" name="venue" value="all" onClick="selectAll(this, 'venue')"/> Select All
                         <br/>
                         <input type="checkbox" name="venue" value="offices"> Microsoft Office(s)
                         <br/>
@@ -58,7 +58,7 @@
                 <div class="checkbox">
                     <h4>Audience (Age)</h4>
                     <label>
-                        <input type="checkbox" onClick="selectAll(this, 'audience')" /> Select All
+                        <input type="checkbox" name="audience" value="all" onClick="selectAll(this, 'audience')" /> Select All
                         <br/>
                         <input type="checkbox" name="audience" value="under5"> Under 5
                         <br/>
@@ -93,6 +93,8 @@
     </div>
 </body>
 
+<p id="demo"></p>
+
 <script>
     // selects all checkboxes
     function selectAll(source, name) {
@@ -102,43 +104,61 @@
     }
 
     // checks for invalid values
-   /* function checkValExists() {
-        var noVal = 0; // flag to check if any of the values are empty
-
-        if(document.getElementsByName("date").values == null)
-            noVal = 1;
-
-        if(noVal == 0 && document.getElementsByName("agenda").values == null)
-            noVal = 1;
+    function checkValExists() {
+        var noVal = false; // flag to check if any of the values are empty
+        var badDate = false; // flag to check no past date is entered 
         
-        if(noVal == 0 && document.getElementsByName("length").values == null)
-            noVal = 1;
+        let [year, month, day] = $('#eventdate').val().split('-');
 
-        if(noVal == 0) {
-            noVal = 1;
+        if(day != undefined) {
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1; //January is 0
+            var yyyy = today.getFullYear();
+
+            if(dd < 10)
+                dd = '0' + dd
+
+            if(mm < 10)
+                mm = '0' + mm
+
+            console.log("in loop");
+
+            if((year < yyyy) || (year == yyyy && month < mm) || (month == mm && day < dd))
+                badDate = true;
+        }
+
+        if(!noVal) {
+            noVal = true;
             checkboxes = document.getElementsByName("venue");
             for (var i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked)
-                    noVal = 0;
+                    noVal = false;
             }
         }
 
-        if(noVal == 0) {
-            noVal = 1;
+        if(!noVal) {
+            noVal = true;
             checkboxes = document.getElementsByName("audience");
             for (var i = 0; i < checkboxes.length; i++) {
                 if (checkboxes[i].checked)
-                    noVal = 0;
+                    noVal = false;
             }
         }
 
-        if(noVal == 1) {
-            alert("Oops! Looks like you haven't filled out all the values in the form.");
-            location.reload(forceGet); // reloads page from server
+        if(noVal && badDate) {
+            alert("Oops! Looks like you haven't filled out all the values in the form and have a date in the past.");
+            location.reload(); // reloads page from cache
         }
-        else
-            window.location = "/getprediction"
-    } */
+        else if (noVal) {
+            alert("Oops! Looks like you haven't filled out all the values in the form.");
+            location.reload(); // reloads page from cache
+        }
+        else if (badDate) {
+            alert("Oops! Looks like you have selected a date in the past.");
+            location.reload(); // reloads page from cache
+        }
+    }
 </script>
 
 </html>
