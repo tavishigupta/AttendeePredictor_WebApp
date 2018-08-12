@@ -22,10 +22,18 @@
                 <div class="prediction">
                     <h3> Expected Number of Attendees: {{ prediction }} </h3>
                 </div>
+
+                <input type="button" class="btn btn-default" value="Get Prediction for Another Event" onclick="reload()">
             </div>
             <div class="col-xs-8 col-xs-4"></div>
         </div>
     </div>
 </body>
+
+<script>
+    function reload(){
+        window.location.assign("/");
+    }
+</script>
 
 </html>
