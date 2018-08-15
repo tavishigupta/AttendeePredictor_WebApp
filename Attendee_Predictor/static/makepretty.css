@@ -1,0 +1,10 @@
+.form-container {
+    border: 5px solid;
+    padding: 20px 20px;
+    background-color: whitesmoke;
+    margin-top: 4%;
+}
+
+.btn {
+    background-color: indigo;
+}
